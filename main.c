@@ -21,8 +21,8 @@ int main(int argc, char *argv[]) {
 
     printf("%lf\t", test(strassen_matrix_multiplication, C1, A, B, j));
     fflush(stdout);
-    printf("%lf\t", test(naive_matrix_multiplication, C0, A, B, j));
-    fflush(stdout);
+    //printf("%lf\t", test(naive_matrix_multiplication, C0, A, B, j));
+    //fflush(stdout);
   
     printf("%d\n", same_matrix((float const *const *const)C0,
                                (float const *const *const)C1, j, j));
