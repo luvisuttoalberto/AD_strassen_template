@@ -1,9 +1,4 @@
-//#include <math.h> //needed for the function pow()
 #include "matrix.h"
-
-
-// remove after debugging
-//#include <stdio.h>
 
 /*
  * this function performs the element-wise
@@ -329,10 +324,5 @@ void strassen_matrix_multiplication(float **C, float const *const *const A, floa
     deallocate_matrix(B_padded, n);
     deallocate_matrix(C_temp, n);
 
-    // uncomment for standard execution
-    //strassen_aux(C, A, B, 0, 0, 0, 0, 0, 0, n);
-    
-    // uncomment for improved memory execution
-    //strassen_aux_mem_improved(C, A, B, 0, 0, 0, 0, 0, 0, n);
 }
 
