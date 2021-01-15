@@ -286,10 +286,12 @@ void strassen_aux_mem_improved(float **C, float const * const * const A, float c
 void strassen_matrix_multiplication(float **C, float const *const *const A,
                                     float const *const *const B, size_t n) 
 {
-    // comment the following line if you want to use the memory allocation improved version of the Strassen algorithm
     strassen_aux(C, A, B, 0, 0, 0, 0, 0, 0, n);
-    
-    // uncomment the following line if you want to use the memory allocation improved version of the Strassen algorithm
-    //strassen_aux_mem_improved(C, A, B, 0, 0, 0, 0, 0, 0, n);
+}
+
+void strassen_matrix_multiplication_improved(float **C, float const *const *const A,
+                                    float const *const *const B, size_t n) 
+{
+    strassen_aux_mem_improved(C, A, B, 0, 0, 0, 0, 0, 0, n);
 }
 

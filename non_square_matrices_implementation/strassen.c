@@ -1,4 +1,6 @@
 #include "matrix.h"
+//remove before deliver
+#include <stdio.h>
 
 /*
  * this function performs the element-wise
@@ -301,8 +303,8 @@ int find_next_power_of_two_of(const int n){
  * This function is exclusively meant to provide an
  * easy to use API.
  */
-void strassen_matrix_multiplication(float **C, float const *const *const A, float const *const *const B, 
-                                    const size_t A_rows, const size_t A_columns, const size_t B_columns) 
+void strassen_matrix_multiplication_improved_nonsquared(float **C, float const *const *const A, float const *const *const B, 
+                                    const size_t A_rows, const size_t A_columns, const size_t B_columns)
 {
 
     size_t A_padded_rows = find_next_power_of_two_of(A_rows);
@@ -326,3 +328,14 @@ void strassen_matrix_multiplication(float **C, float const *const *const A, floa
 
 }
 
+void strassen_matrix_multiplication(float **C, float const *const *const A, float const *const *const B, 
+                                    const size_t A_rows, const size_t A_columns, const size_t B_columns) 
+{
+    strassen_aux(C, A, B, 0, 0, 0, 0, 0, 0, A_rows);
+}
+
+void strassen_matrix_multiplication_improved(float **C, float const *const *const A, float const *const *const B, 
+                                    const size_t A_rows, const size_t A_columns, const size_t B_columns) 
+{
+    strassen_aux_mem_improved(C, A, B, 0, 0, 0, 0, 0, 0, A_rows);
+}
