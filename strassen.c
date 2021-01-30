@@ -9,7 +9,6 @@
  */
 void sub_matrix_blocks(float **C, float const * const * const A, float const * const * const B, const size_t C_f_row, const size_t C_f_col, const size_t A_f_row, const size_t A_f_col, const size_t B_f_row, const size_t B_f_col, const size_t n)
 {
-    // see if you can optimize these indeces too as in the function naive_aux
     for(size_t y = 0; y < n; y ++){
         for(size_t x = 0; x < n; x++){
             C[y + C_f_row][x + C_f_col] = A[y + A_f_row][x + A_f_col] - B[y + B_f_row][x + B_f_col];
@@ -26,7 +25,6 @@ void sub_matrix_blocks(float **C, float const * const * const A, float const * c
  */
 void sum_matrix_blocks(float **C, float const * const * const A, float const * const * const B, const size_t C_f_row, const size_t C_f_col, const size_t A_f_row, const size_t A_f_col, const size_t B_f_row, const size_t B_f_col, const size_t n)
 {
-    // see if you can optimize these indeces too as in the function naive_aux
     for(size_t y = 0; y < n; y ++){
         for(size_t x = 0; x < n; x++){
             C[y + C_f_row][x + C_f_col] = A[y + A_f_row][x + A_f_col] + B[y + B_f_row][x + B_f_col];
@@ -44,8 +42,6 @@ void sum_matrix_blocks(float **C, float const * const * const A, float const * c
  */
 void naive_aux(float **C, float const * const * const A, float const * const * const B, const size_t C_f_row, const size_t C_f_col, const size_t A_f_row, const size_t A_f_col, const size_t B_f_row, const size_t B_f_col, const size_t n)
 {
-    // optimize this section changing the indeces in the for loops instead of summing them in the
-    // matrices indeces selections
     size_t limit_row_A = n + A_f_row;
     size_t limit_col_B = n + B_f_col;
     for(size_t y = A_f_row; y < limit_row_A; y++){
@@ -65,7 +61,7 @@ void naive_aux(float **C, float const * const * const A, float const * const * c
  * The result is placed in the sub-matrix C.
  * The parameters *_f_row and *_f_col
  * represents the first row and the first column,
- * respectively, of the sub-matrx we want to deal with. 
+ * respectively, of the sub-matrix we want to deal with. 
  */
 void strassen_aux(float **C, float const * const * const A, float const * const * const B, const size_t C_f_row, const size_t C_f_col, const size_t A_f_row, const size_t A_f_col, const size_t B_f_row, const size_t B_f_col, const size_t n)
 {
@@ -166,7 +162,7 @@ void strassen_aux(float **C, float const * const * const A, float const * const 
 
 
 /*
- * Remove the unnecessary memory allocations
+ * In the following implementation I removed the unnecessary memory allocations.
  */
 void strassen_aux_mem_improved(float **C, float const * const * const A, float const * const * const B, const size_t C_f_row, const size_t C_f_col, const size_t A_f_row, const size_t A_f_col, const size_t B_f_row, const size_t B_f_col, const size_t n)
 {
@@ -223,8 +219,7 @@ void strassen_aux_mem_improved(float **C, float const * const * const A, float c
     // C21 = P3 + P4
     sum_matrix_blocks(C, (const float * const* const) P[2], (const float * const* const) P[0], C_f_row + n2, C_f_col, 0, 0, 0, 0, n2);
 
-    // P[1] and P[2] are not needed anymore
-    // so we can deallocate them
+    // P[1] and P[2] are not needed anymore, so we can deallocate them
     deallocate_matrix(P[2], n2);
     deallocate_matrix(P[1], n2);
 
@@ -279,8 +274,7 @@ void strassen_aux_mem_improved(float **C, float const * const * const A, float c
 }
 
 /*
- * This function is exclusively meant to provide an
- * easy to use API.
+ * This function is exclusively meant to provide an easy to use API.
  */
 
 void strassen_matrix_multiplication(float **C, float const *const *const A,
@@ -288,7 +282,9 @@ void strassen_matrix_multiplication(float **C, float const *const *const A,
 {
     strassen_aux(C, A, B, 0, 0, 0, 0, 0, 0, n);
 }
-
+/*
+ * This function is just meant to provide an easy to use API for the improved version.
+ */
 void strassen_matrix_multiplication_improved(float **C, float const *const *const A,
                                     float const *const *const B, size_t n) 
 {

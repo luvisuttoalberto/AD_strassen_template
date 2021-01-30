@@ -1,6 +1,5 @@
 #include "matrix.h"
-//remove before deliver
-#include <stdio.h>
+#include "strassen.h"
 
 /*
  * this function performs the element-wise
